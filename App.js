@@ -16,7 +16,7 @@ export default function App() {
     <SafeAreaView style={estilos.containerSafe}>
       <StatusBar />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Inicial">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
             name="Inicial"
             component={Inicial}
