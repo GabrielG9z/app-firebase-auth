@@ -3,8 +3,12 @@ import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 /* Importamos os recursos de autenticação através das configurações Firebase */
 import { auth } from "../firebaseConfig";
 
+/* Import de recuperação de senha e email */
 /* Importamos as funções de autenticação diretamente da lib */
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -17,11 +21,32 @@ const Login = ({ navigation }) => {
     }
     signInWithEmailAndPassword(auth, email, senha)
       .then(() => {
-        navigation.navigate("AreaLogada");
+        navigation.replace("AreaLogada");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
+        let mensagem;
+        switch (error.code) {
+          case "auth/user-not-found":
+            mensagem = "Usuário não encontrado!";
+            break;
+          case "auth/wrong-password":
+            mensagem = "Senha incorreta";
+            break;
+          default:
+            mensagem = "Houve um erro, tente novamente mais tarde";
+            break;
+        }
+        Alert.alert("Ops", mensagem);
       });
+  };
+
+  const recuperarSenha = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Alert.alert("Recuperar senha", "Verifique sua caixa de entrada");
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <View style={estilos.container}>
@@ -41,6 +66,11 @@ const Login = ({ navigation }) => {
 
         <View style={estilos.botoes}>
           <Button title="Entre" color="green" onPress={login} />
+          <Button
+            title="Recuperar Senha"
+            color="orange"
+            onPress={recuperarSenha}
+          />
         </View>
       </View>
     </View>
