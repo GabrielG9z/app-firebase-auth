@@ -1,3 +1,4 @@
+import { app } from "./firebaseConfig";
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,11 +11,12 @@ import AreaLogada from "./screens/AreaLogada";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  //console.log(app);
   return (
     <SafeAreaView style={estilos.containerSafe}>
       <StatusBar />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AreaLogada">
+        <Stack.Navigator initialRouteName="Inicial">
           <Stack.Screen
             name="Inicial"
             component={Inicial}
