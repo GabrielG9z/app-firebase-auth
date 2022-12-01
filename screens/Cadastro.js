@@ -1,6 +1,43 @@
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { useState } from "react";
+import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import { auth } from "../firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Cadastro = () => {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+  const cadastrar = () => {
+    if (!email || !senha) {
+      Alert.alert("Atenção", "Você deve preencher o e-mail e senha");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, senha)
+      .then(() => {
+        Alert.alert("cadastro", "Conta criada com sucesso!");
+      })
+      .catch((error) => {
+        console.log(error);
+        let mensagem;
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            mensagem = "E-mail já cadastrado";
+            break;
+          case "auth/weak-password":
+            mensagem = "Senha deve ter pelo menos 6 digítos! ";
+            break;
+
+          case "auth/invalid-email":
+            mensagem = "Endereço de e-mail inválido!";
+
+          default:
+            mensagem = "Algo deu errado... tente novamente!";
+            break;
+        }
+        Alert.alert("Atenção", mensagem);
+      });
+  };
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
