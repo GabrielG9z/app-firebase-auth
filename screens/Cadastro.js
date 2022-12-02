@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Button,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Cadastro = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState("");
 
   const cadastrar = () => {
     if (!email || !senha) {
@@ -49,7 +57,8 @@ const Cadastro = ({ navigation }) => {
             break;
         }
         Alert.alert("Atenção", mensagem);
-      });
+      })
+      .finally(() => setLoading(false));
   };
   return (
     <View style={estilos.container}>
@@ -67,7 +76,13 @@ const Cadastro = ({ navigation }) => {
           style={estilos.input}
         />
         <View style={estilos.botoes}>
-          <Button onPress={cadastrar} title="Cadastre-se" color="blue" />
+          <Button
+            disabled={loading}
+            onPress={cadastrar}
+            title="Cadastre-se"
+            color="blue"
+          />
+          {loading && <ActivityIndicator size="large" color="blue" />}
         </View>
       </View>
     </View>
