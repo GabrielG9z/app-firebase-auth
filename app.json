@@ -2,12 +2,12 @@
   "expo": {
     "name": "App auth",
     "slug": "app-auth",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/lock.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,16 +15,15 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/ed204fc6-50f4-4ba3-853c-d6131a9a7f3f"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.gabriel1533.appauth"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/splash-auth.png",
+        "resizeMode": "contain",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.gabriel1533.appauth"
