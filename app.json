@@ -12,13 +12,15 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/ed204fc6-50f4-4ba3-853c-d6131a9a7f3f"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gabriel1533.appauth"
     },
     "android": {
       "adaptiveIcon": {
@@ -35,6 +37,9 @@
         "projectId": "ed204fc6-50f4-4ba3-853c-d6131a9a7f3f"
       }
     },
-    "owner": "gabriel1533"
+    "owner": "gabriel1533",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }
